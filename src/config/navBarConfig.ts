@@ -23,7 +23,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		icon: "material-symbols:article",
 		children: [
 			// 归档
-			LinkPresets.Archive,
+			//LinkPresets.Archive,
 
 			// 分类
 			LinkPresets.Categories,
