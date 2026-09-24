@@ -107,7 +107,7 @@ FreeRTOS是一款受欢迎、广泛应用于嵌入式系统的RTOS，其开源�
 
 即使单核处理器一次只能执行一项任务。 多任务操作系统可以通过任务之间的快速切换制造并发执行的假象。下图展示了与时间相关的三项任务的执行模式。 任务名称采用颜色编码，并写在左手边。 时间从左向右移动， 彩色线条显示了在任何特定时间正在执行的任务。 上方展示了所感知的并发执行模式， 下方展示了实际的多任务执行模式。
 
-![](images/image1.png)
+![](../images/image1.png)
 
 ## 任务调度
 
@@ -124,9 +124,9 @@ FreeRTOS 默认使用**固定优先级**的**抢占式调度策略**，对**同�
 
 但是并不是说高优先级的任务会一直执行，导致低优先级的任务无法得到执行。如果高优先级任务**等待某个资源（延时或等待信号量等）**而无法执行，调度器会选择执行其他就绪的高优先级的任务。
 
-![](images/image2.png)
+![](../images/image2.png)
 
-![](images/image3.png)
+![](../images/image3.png)
 
 ## 任务状态
 
@@ -139,7 +139,7 @@ FreeRTOS中任务共存在4种状态：
 
 只有就绪态可转变成运行态，其他状态的任务想运行，必须先转变成就绪态。转换关系如下：
 
-![](images/image4.png)
+![](../images/image4.png)
 
 这四种状态中，除了运行态，其他三种任务状态的任务都有其对应的任务状态列表：
 
@@ -151,11 +151,11 @@ FreeRTOS中任务共存在4种状态：
 
 以就绪列表为例。如果在32位的硬件中，会保存一个32位的变量，代表0-31的优先级。当某个位，置一时，代表所对应的优先级就绪列表有任务存在。
 
-![](images/image5.png)
+![](../images/image5.png)
 
 如果有多个任务优先级相同，会连接在同一个就绪列表上：
 
-![](images/image6.png)
+![](../images/image6.png)
 
 调度器总是在所有处于就绪列表的任务中，选择具有最高优先级的任务来执行。
 
@@ -183,11 +183,11 @@ FreeRTOS 实时内核通过**滴答计数变量**测量时间。定时器中断�
 
 将 TaskA在相应的处理器寄存器中的上下文保存到其任务堆栈中。
 
-![](images/image7.png)
+![](../images/image7.png)
 
 将 TaskB 的上下文从其任务堆栈中恢复到相应的处理器寄存器中
 
-![](images/image8.png)
+![](../images/image8.png)
 
 #### 什么时候进行上下文切换
 
@@ -217,7 +217,7 @@ RTOS 调度器启动时，**自动创建空闲任务**，以确保始终存在�
 
 官网地址：
 
-![](images/image9.png)
+![](../images/image9.png)
 
 这里我们选择当前最新的分发包202212.01版本下载。
 
@@ -226,7 +226,7 @@ RTOS 调度器启动时，**自动创建空闲任务**，以确保始终存在�
 
 Github地址：
 
-![](images/image10.png)
+![](../images/image10.png)
 
 现在FreeRTOS已经将源码迁移到Github上，可以直接下载。
 
@@ -290,7 +290,7 @@ RVDS 文件夹包含了各种处理器相关的文件夹，FreeRTOS 是一个软
 
 关联还是得通过写代码来关联，这部分关联的文件叫接口文件，通常由汇编和 C 联合编写。这些接口文件都是跟硬件密切相关的，不同的硬件接口文件是不一样的，但都大同小异。编写这些接口文件的过程我们就叫移植，移植的过程通常由 FreeRTOS 和 mcu 原厂的人来负责，移植好的这些接口文件就放在 RVDS 这个文件夹的目录下。
 
-![](images/image11.png)
+![](../images/image11.png)
 
 FreeRTOS 为我们提供了 cortex-m0、m3、m4 和 m7 等内核的单片机的接口文件，根据mcu的内核选择对应的接口文件即可。其实准确来说，不能够叫移植，应该叫使用官方的移植， 因为这些跟硬件相关的接口文件，RTOS 官方都已经写好了，我们只是使用而已。
 
@@ -303,7 +303,7 @@ MemMang文件夹
 
 MemMang 文件夹下存放的是跟内存管理相关的，总共有五个 heap 文件以及一个 readme 说明文件。
 
-![](images/image12.png)
+![](../images/image12.png)
 
 这五个 heap 文件在移植的时候必须使用一个，因为 FreeRTOS 在创建内核对象的时候使用的是动态分配内存，而这些动态内存分配的函数则在这几个文件里面实现，不同的分配算法会导致不同的效率与结果，后面在内存管理中我们会讲解每个文件的区别，由于现在是初学，所以我们选用 **heap4.c **即可。
 
@@ -313,55 +313,55 @@ MemMang 文件夹下存放的是跟内存管理相关的，总共有五个 heap 
 
 在例程的根路径下，新建“FreeRTOS”文件夹，并且在里面新建“portable”和“source”两个空文件夹。
 
-![](images/image13.png)
+![](../images/image13.png)
 
 拷贝FreeRTOS源码的Source文件夹的7个.c文件到例程的source文件夹。
 
-![](images/image14.png)
+![](../images/image14.png)
 
 拷贝FreeRTOS源码portable文件夹下的Keil、RVDS、MemMang到例程的portable文件夹下。
 
-![](images/image15.png)
+![](../images/image15.png)
 
 其中例程的MemMang可只保留heap_4.c:
 
-![](images/image16.png)
+![](../images/image16.png)
 
 其中例程的RVDS可只保留ARM_CM3（对应我们的芯片内核）。
 
 拷贝FreeRTOS源码include文件夹到例程的FreeRTOS文件夹下。
 
-![](images/image17.png)
+![](../images/image17.png)
 
 FreeRTOSConfig.h 文件是 FreeRTOS 的工程配置文件，因为 FreeRTOS 是可以裁剪的 实时操作内核，应用于不同的处理器平台，用户可以通过修改这个 FreeRTOS 内核的配置 头文件来裁剪 FreeRTOS 的功能，所以我们把它拷贝一份放在 user 这个文件夹下面。
 
 在源码“..\FreeRTOS\Demo”文件夹下面找到 “ CORTEX_STM32F103_Keil ” 这个文件夹下，找到 “FreeRTOSConfig.h”文件，然后拷贝到我们工程下的 “Core/Inc” 文件夹下即可，等下我们需要对这个文件进行修改。
 
-![](images/image18.png)
+![](../images/image18.png)
 
 ### 工程添加源码文件
 
 工程新建Group“FreeRTOS/Source”和“FreeRTOS/Portable”。
 
-![](images/image19.png)
+![](../images/image19.png)
 
 FreeRTOS/Source添加.c文件。
 
-![](images/image20.png)
+![](../images/image20.png)
 
 FreeRTOS/Portable添加port.c和heap_4.c文件。
 
-![](images/image21.png)
+![](../images/image21.png)
 
 添加配置头文件。
 
-![](images/image22.png)
+![](../images/image22.png)
 
 添加头文件。
 
 FreeRTOS 的源码已经添加到开发环境的组文件夹下面，编译的时候需要为这些源文件指定头文件的路径，不然编译会报错。FreeRTOS 的源码里面只有 include 和RVDS\ARM_CM3这两个文件夹下面有头文件，只需要将这两个头文件的路径在开发环境里面指定即可。
 
-![](images/image23.png)
+![](../images/image23.png)
 
 同时我们还将 FreeRTOSConfig.h 这个头文件拷贝到了工程根目录下的 Core/Inc 文件夹下，这个路径本身就在开发环境里面。(放其他路径也可以, 就是一个.h文件)
 
@@ -426,13 +426,13 @@ void SysTick_Handler(void)
 
 为了保险起见，可以考虑在SYS选择HAL时钟源的时候换成其他的，并且中断优先级设为较高，比如1。
 
-![](images/image24.png)
+![](../images/image24.png)
 
-![](images/image25.png)
+![](../images/image25.png)
 
-![](images/image26.png)
+![](../images/image26.png)
 
-![](images/image27.png)
+![](../images/image27.png)
 
 ## FreeRTOS在基于寄存器项目中移植步骤
 
@@ -440,25 +440,25 @@ void SysTick_Handler(void)
 
 在例程的根路径下，新建“FreeRTOS”文件夹，并且在里面新建“portable”和“source”两个空文件夹。
 
-![](images/image13.png)
+![](../images/image13.png)
 
 拷贝FreeRTOS源码的Source文件夹的7个.c文件到例程的source文件夹。
 
-![](images/image14.png)
+![](../images/image14.png)
 
 拷贝FreeRTOS源码portable文件夹下的Keil、RVDS、MemMang到例程的portable文件夹下。
 
-![](images/image15.png)
+![](../images/image15.png)
 
 其中例程的MemMang可只保留heap_4.c:
 
-![](images/image16.png)
+![](../images/image16.png)
 
 其中例程的RVDS可只保留ARM_CM3（对应我们的芯片内核）。
 
 拷贝FreeRTOS源码include文件夹到例程的FreeRTOS文件夹下。
 
-![](images/image17.png)
+![](../images/image17.png)
 
 FreeRTOSConfig.h 文件是 FreeRTOS 的工程配置文件，因为 FreeRTOS 是可以裁剪的 实时操作内核，应用于不同的处理器平台，用户可以通过修改这个 FreeRTOS 内核的配置头文件来裁剪 FreeRTOS 的功能，所以我们把它拷贝一份放在 user 这个文件夹下面。
 
@@ -466,9 +466,9 @@ FreeRTOSConfig.h 文件是 FreeRTOS 的工程配置文件，因为 FreeRTOS 是�
 
 工程新建Group“FreeRTOS/Source”和“FreeRTOS/Portable”。
 
-![](images/image28.png)
+![](../images/image28.png)
 
-![](images/image29.png)
+![](../images/image29.png)
 
 ### 系统配置文件修改
 
@@ -1301,7 +1301,7 @@ BaseType_t xTaskResumeFromISR( TaskHandle_t xTaskToResume )
 void vTaskList( char * pcWriteBuffer )
 ```
 
-![](images/image30.png)
+![](../images/image30.png)
 
 ```c
 名称			状态    优先级   堆栈使用 任务编号
@@ -1510,7 +1510,7 @@ FreeRTOS中，将PendSV和SysTick设置最低中断优先级（数值最大，15
 
 FreeRTOS利用**BASEPRI**寄存器实现中断管理，屏蔽优先级低于某一个阈值的中断。比如：** BASEPRI**设置为0x50（只看高四位，也就是5），代表中断优先级在5~15内的均被屏蔽，0~4的中断优先级正常执行。
 
-![](images/image31.png)
+![](../images/image31.png)
 
 在中断服务函数中调用FreeRTOS的API函数需注意：
 
@@ -1567,15 +1567,15 @@ FreeRTOS 开关中断函数其实是宏定义，在 portmacro.h 中有定义，�
 
 ### 添加定时器
 
-![](images/image32.png)
+![](../images/image32.png)
 
-![](images/image33.png)
+![](../images/image33.png)
 
-![](images/image34.png)
+![](../images/image34.png)
 
-![](images/image35.png)
+![](../images/image35.png)
 
-![](images/image36.png)
+![](../images/image36.png)
 
 添加完定时器，重新注释掉stm32f1xx_it.c的SVC_Handler和PendSV_Handler函数。
 
@@ -2238,7 +2238,7 @@ void Task2(void *pvParameters)
 
 假设有一个定时器，每隔1秒触发一次，希望在每次触发时执行某个任务。如果使用 vTaskDelay 来实现，那么你只能实现任务每秒执行一次，而不能确保任务在每秒的开始时刻执行。但如果你使用 xTaskDelayUntil，你可以指定任务在每秒的开始时刻执行，即使任务执行的时间不同。
 
-![](images/image37.png)
+![](../images/image37.png)
 
 ## 延时函数演示实验（掌握）
 
@@ -3008,7 +3008,7 @@ void Task2(void *pvParameters)
 
 这个过程中，任务A因为资源被占用而被阻塞，而任务B却被中优先级的任务C抢占，导致任务B无法及时完成。这种情况称为优先级翻转，因为任务C的介入翻转了高优先级任务A的执行顺序。
 
-![](images/image38.png)
+![](../images/image38.png)
 
 ## 优先级翻转实验（掌握）
 
@@ -3182,7 +3182,7 @@ void Task3(void * pvParameters)
 
 优先级继承是一种解决实时系统中任务调度引起的优先级翻转问题的机制。在具体的任务调度中，当一个高优先级任务等待一个低优先级任务所持有的资源时，系统会提升低优先级任务的优先级，以避免高优先级任务长时间等待的情况。
 
-![](images/image39.png)
+![](../images/image39.png)
 
 优先级继承无法完全解决优先级翻转，只是在某些情况下将影响降至最低。
 
@@ -3616,7 +3616,7 @@ void Task2(void *pvParameters)
 
 下图表示一个 24 位事件组，使用 3 个位来保存前面描述的 3 个示例事件。 在图片中，仅设置了事件位2。
 
-![](images/image40.png)
+![](../images/image40.png)
 
 ### 事件标志组和信号量的区别
 
@@ -3798,13 +3798,13 @@ void Task2(void * pvParameters)
 
 大多数任务间通信方法通过中间对象，如队列、信号量或事件组。发送任务写入通信对象，接收任务从通信对象读取。当使用直接任务通知时，顾名思义，发送任务直接向接收任务发送通知，而无需中间对象。
 
-![](images/image41.png)
+![](../images/image41.png)
 
-![](images/image42.png)
+![](../images/image42.png)
 
-![](images/image43.png)
+![](../images/image43.png)
 
-![](images/image44.png)
+![](../images/image44.png)
 
 每个 RTOS 任务都有一个任务通知组，每条通知均独立运行，都有“挂起”或“非挂起”的通知状态，以及一个 32 位通知值。常量 configTASK_NOTIFICATION_ARRAY_ENTRIES 可设置任务通知组中的索引数量。在 FreeRTOS V10.4.0 版本前，任务只有单条任务通知（即只能一对一），没有任务通知组。
 
@@ -4475,7 +4475,7 @@ STM32F103xC、STM32F103xD和STM32F103xE增强型产品支持三种低功耗模�
 
 注意：在进入停机或待机模式时，RTC、IWDG和对应的时钟不会被停止。
 
-![](images/image45.png)
+![](../images/image45.png)
 
 主要使用睡眠模式，任何中断或事件都可以唤醒睡眠模式。Tickless低功耗模式通过调用指令 __WFI 实现睡眠模式
 
@@ -4704,7 +4704,7 @@ void Task2(void *pvParameters)
 
 heap_1 是最简单的实现方式。内存一经分配，它不允许内存再被释放。尽管如此，heap_1.c 还是适用于大量嵌入式应用程序。这是因为许多小型和深度嵌入的应用程序在系统启动时创建了所需的所有任务、队列、信号量等，并在程序的生命周期内使用所有这些对象（直到应用程序再次关闭或重新启动）。任何内容都不会被删除。
 
-![[image46.png]]
+![](../images/image46.png)
 
 ### heap_2算法
 
@@ -4717,7 +4717,7 @@ heap_2.c 适用于许多必须动态创建对象的小型实时系统 。
 
 heap_2 使用最佳适应算法，该算法在空闲内存中选择与请求的内存大小最接近的块来分配内存。下面是一个简单的例子来说明最佳适应算法：
 
-![](images/image47.png)
+![](../images/image47.png)
 
 假设有一个空闲内存，其中包含以下块：
 
@@ -4752,7 +4752,7 @@ heap_4使用第一适应算法，并且会将相邻的空闲内存块合并成�
 
 第一适应算法会在可用内存块中选择第一个足够大的内存块进行分配。
 
-![](images/image48.png)
+![](../images/image48.png)
 
 假设有一个内存块链表，其中包含以下顺序的内存块：
 
