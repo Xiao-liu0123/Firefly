@@ -6,7 +6,10 @@ tags:
 author: Monitor
 draft: false
 date: 2026-09-22
+category: FreeRTOS
 ---
+
+
 
 # FreeRTOS 实时操作系统
 
